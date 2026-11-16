@@ -1,0 +1,56 @@
+# Builds Marko.app for a version tag and attaches it to a GitHub Release.
+# To release: set CFBundleShortVersionString in Support/Info.plist, commit, then
+#   git tag v<that version> && git push origin v<that version>
+# The app is signed ad hoc (scripts/build-app.sh), not notarized: README "Install" says how to open it.
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    # Xcode 27 (Swift 6.4), the toolchain the app is developed and tested with. The macos-26 image
+    # stops at Xcode 26 (Swift 6.3), which does not compile the package.
+    runs-on: xcode-27
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+
+      # Info.plist is the one place the version lives (`marko --version` reads it), so the tag
+      # must say the same or the download would report another version than its name.
+      - name: Check the tag against Info.plist
+        run: |
+          version="$(/usr/libexec/PlistBuddy -c 'Print :CFBundleShortVersionString' Support/Info.plist)"
+          if [ "$GITHUB_REF_NAME" != "v$version" ]; then
+            echo "::error::Tag $GITHUB_REF_NAME does not match Info.plist version $version"
+            exit 1
+          fi
+          echo "VERSION=$version" >> "$GITHUB_ENV"
+
+      - run: swift --version
+
+      # The editor tests open windows and stay a local check; these two targets need none.
+      - name: Test
+        run: swift test --filter 'MarkoCoreTests|MarkoCommandTests'
+
+      - name: Build
+        run: scripts/build-app.sh
+
+      # ditto keeps the signature and the bundle's attributes, which plain zip does not promise.
+      - name: Package
+        run: |
+          archive="Marko-$VERSION-macos-arm64.zip"
+          codesign --verify --deep --strict build/Marko.app
+          ditto -c -k --keepParent build/Marko.app "$archive"
+          shasum -a 256 "$archive" > "$archive.sha256"
+
+      - name: Publish
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" Marko-*.zip Marko-*.zip.sha256 \
+            --verify-tag --generate-notes --title "Marko $VERSION"

@@ -1,0 +1,20 @@
+# Build output
+.build/
+build/
+.swiftpm/
+DerivedData/
+xcuserdata/
+*.xcuserstate
+
+# macOS
+.DS_Store
+
+# Python caches of scripts/perf
+__pycache__/
+*.pyc
+
+# Local-only settings
+.claude/settings.local.json
+.claude/*.local.*
+.env
+.env.*
