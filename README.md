@@ -38,7 +38,9 @@ If you prefer the terminal, this does the same as step 3 before the first start:
 xattr -dr com.apple.quarantine /Applications/Marko.app
 ```
 
-The `.sha256` file beside the download is its checksum (`shasum -a 256 -c <file>.sha256`).
+The `.sha256` file beside the download is its checksum (`shasum -a 256 -c <file>.sha256`). From
+the release after 0.1.0 on, `gh attestation verify <file>.zip --repo Den1al/marko` checks that
+the download was built by this repository's release workflow.
 
 **The `marko` command.** Choose **Marko > Install Command Line Tool…** in the app, or run the
 script inside it:

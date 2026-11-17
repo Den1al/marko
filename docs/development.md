@@ -247,8 +247,10 @@ events): `scripts/drive`. The scripts' headers have the details.
 Set `CFBundleShortVersionString` in `Support/Info.plist`, commit, then tag that commit
 `v<version>` and push the tag. [.github/workflows/release.yml](../.github/workflows/release.yml)
 refuses a tag that differs from the plist, runs the core and command tests, builds with
-`scripts/build-app.sh` and attaches `Marko-<version>-macos-arm64.zip` with its checksum to a
-GitHub Release. The editor tests and the smoke run are not part of it: run them before tagging.
+`scripts/build-app.sh`, attests the archive's provenance and attaches
+`Marko-<version>-macos-arm64.zip` with its checksum to a GitHub Release. A pushed tag and a
+published release cannot be changed afterwards, so after a change to the workflow run it by
+hand first (`gh workflow run release.yml`), which does everything but publish. The editor tests and the smoke run are not part of it: run them before tagging.
 
 ## Conventions
 
