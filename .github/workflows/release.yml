@@ -18,7 +18,10 @@ jobs:
     runs-on: xcode-27
     timeout-minutes: 30
     steps:
-      - uses: actions/checkout@v5
+      # Pinned to a commit, which a moved tag cannot change; Dependabot proposes the updates.
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          persist-credentials: false
 
       # Info.plist is the one place the version lives (`marko --version` reads it), so the tag
       # must say the same or the download would report another version than its name.

@@ -1,0 +1,8 @@
+# Keeps the pinned actions of the workflows current. swift-markdown is pinned on purpose
+# (Package.swift, `exact:`) and is left out; alerts about it still arrive.
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
