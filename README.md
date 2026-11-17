@@ -271,7 +271,8 @@ The complete list: [docs/known-limits.md](docs/known-limits.md).
 
 ## Licence
 
-Marko is released under the MIT License: see [LICENSE](LICENSE).
+Created by [Daniel Abeles](https://github.com/Den1al). Marko is released under the MIT License:
+see [LICENSE](LICENSE).
 
 Marko links [swift-markdown](https://github.com/swiftlang/swift-markdown) (Apache License 2.0)
 and, through it, [swift-cmark](https://github.com/swiftlang/swift-cmark) (BSD 2-Clause, with parts

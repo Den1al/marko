@@ -1,7 +1,8 @@
 Third-party software in Marko
 =============================
 
-Marko itself is released under the MIT License (the file LICENSE in its source repository).
+Marko itself is Copyright (c) 2026 Daniel Abeles and released under the MIT License (the file
+LICENSE in its source repository).
 
 Marko.app contains the following software, built into its executable. Each is used under
 the licence reproduced below. This file is copied into the app at
