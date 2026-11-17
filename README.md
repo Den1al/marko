@@ -4,6 +4,8 @@ A native macOS Markdown editor that renders as you type. Headings, lists, tables
 images show in place, and the Markdown syntax appears only around the thing you are editing. The
 file on disk is always exactly the Markdown you typed: opening and saving never rewrite it.
 
+![Marko showing SAMPLE.md, with the folder's file tree in the sidebar](docs/screenshot.png)
+
 Marko is a young app, for macOS 26 on Apple silicon only. Its [known limits](#known-limits) are
 listed below.
 
@@ -279,6 +281,7 @@ under the MIT licence). Their licence texts and notices are in
 
 ## More
 
+- [SAMPLE.md](SAMPLE.md) – the document in the picture above; open it to try Marko.
 - [docs/README.md](docs/README.md) – what each document is and when to read it.
 - [docs/development.md](docs/development.md) – building, testing, running the app safely.
 - [docs/architecture.md](docs/architecture.md) – how it works.
