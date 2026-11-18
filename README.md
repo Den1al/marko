@@ -9,6 +9,25 @@ file on disk is always exactly the Markdown you typed: opening and saving never 
 Marko is a young app, for macOS 26 on Apple silicon only. Its [known limits](#known-limits) are
 listed below.
 
+## For the Markdown your AI tools write
+
+Plans, specs, notes, READMEs, `AGENTS.md`: coding agents and chat tools read and write Markdown
+all day. Marko is the editor for reading and fixing those files beside them.
+
+- **Watch a file change.** When an agent rewrites the file you have open, Marko shows the new
+  text where you were. If you have unsaved changes of your own, yours stay and saving asks which
+  to keep.
+- **No noise in the diff.** Files are kept byte for byte. Opening and saving what an agent wrote
+  never reformats it, so `git diff` shows only what you changed.
+- **Read it as a document.** Open a repository's folder and its Markdown is rendered, with the
+  file tree beside it.
+- **In the terminal, where agents run.** `marko plan.md` opens a file, and `marko --wait` works
+  as `$EDITOR`.
+- **Safe with text you did not write.** Remote images in generated or downloaded Markdown are a
+  way to track you or leak data. Marko fetches none until you trust the folder.
+- **No AI inside.** No model, no account, no telemetry. Marko makes one kind of network request,
+  for the remote images of a folder you trust.
+
 ## Features
 
 - Editing in place on TextKit 2: one native text view, no web view. Undo, find, spelling and
